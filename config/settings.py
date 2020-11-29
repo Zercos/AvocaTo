@@ -23,6 +23,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'users.app.UsersConfig'
+    'quest.app.QuestConfig'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
