@@ -2,9 +2,9 @@
 Django settings for AvocaTo project.
 """
 
-import environ
-
 from pathlib import Path
+
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,14 +23,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'users.app.UsersConfig'
-    'quest.app.QuestConfig'
+    'users.apps.UsersConfig',
+    'quest.apps.QuestConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'markdownify',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -117,3 +119,12 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # Media files
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+# Configure Markdownify
+MARKDOWNIFY_STRIP = False
+MARKDOWNIFY_WHITELIST_TAGS = [
+    'a', 'blockquote', 'code', 'em', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'li', 'ol', 'p', 'strong', 'ul',
+]
+
+# Configure Crispy
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
