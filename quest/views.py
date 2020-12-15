@@ -1,9 +1,30 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseBadRequest
 from django.urls import reverse
 from django.utils import timezone
-from django.views.generic import DayArchiveView, RedirectView, DetailView
+from django.views.generic import (CreateView, DayArchiveView, DetailView,
+                                  RedirectView)
 
+from quest.forms import AnswerAcceptanceForm, AnswerForm, QuestionForm
 from quest.models import Question
-from quest.forms import AnswerAcceptanceForm, AnswerForm
+
+
+class AskQuestionView(LoginRequiredMixin, CreateView):
+    form_class = QuestionForm
+    template_name = 'quest/ask.html'
+
+    def get_initial(self):
+        return {'user': self.request.user.id}
+
+    def form_valid(self, form):
+        action = self.request.POST.get('action')
+        if action == 'SAVE':
+            return super().form_valid(form)
+        elif action == 'PREVIEW':
+            preview = Question(title=form.cleaned_date['title'], question=form.cleaned_data['question'])
+            ctx = self.get_context_data(preview=preview)
+            return self.render_to_response(ctx)
+        return HttpResponseBadRequest()
 
 
 class QuestionDetailView(DetailView):
