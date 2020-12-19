@@ -23,7 +23,7 @@ cd AvocaTo && pipenv install --dev && pipenv shell
 ```
 cp config/.env.example config/.env
 ```
- 
+
 * Run the migration to set up the database
 ```
 ./manage.py migrate
@@ -45,4 +45,4 @@ PostgreSQL: *v11*
 
 
 ### License
-This project is licensed under the GNU General Public License
+This project is licensed under the GNU General Public License.
