@@ -19,12 +19,12 @@
         </ul>
         <div>
             {% if previous_day %}
-                <a href="{% url 'qanda:daily_questions' year=previous_day.year month=previous_day.month day=previous_day.day %}">
+                <a href="{% url 'quest:daily_questions' year=previous_day.year month=previous_day.month day=previous_day.day %}">
                     << Previous Day
                 </a>
             {% endif %}
             {% if next_day %}
-                <a href="{% url 'qanda:daily_questions' year=next_day.year month=next_day.month day=next_day.day %}">
+                <a href="{% url 'quest:daily_questions' year=next_day.year month=next_day.month day=next_day.day %}">
                     Next Day >>
                 </a>
             {% endif %}

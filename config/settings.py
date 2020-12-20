@@ -23,6 +23,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'markdownify',
+    'crispy_forms',
     'users.apps.UsersConfig',
     'quest.apps.QuestConfig',
     'django.contrib.admin',
@@ -31,8 +33,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'markdownify',
-    'crispy_forms',
 ]
 
 MIDDLEWARE = [
