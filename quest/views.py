@@ -21,7 +21,7 @@ class AskQuestionView(LoginRequiredMixin, CreateView):
         if action == 'SAVE':
             return super().form_valid(form)
         elif action == 'PREVIEW':
-            preview = Question(title=form.cleaned_date['title'], question=form.cleaned_data['question'])
+            preview = Question(title=form.cleaned_data['title'], question=form.cleaned_data['question'])
             ctx = self.get_context_data(preview=preview)
             return self.render_to_response(ctx)
         return HttpResponseBadRequest()
