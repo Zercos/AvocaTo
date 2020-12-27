@@ -50,7 +50,7 @@ class QuestionDetailView(DetailView):
 
 
 class DailyQuestionList(DayArchiveView):
-    queryset = Question.objects.all()
+    queryset = Question.objects.filter(status=Question.ACCEPTED).all()
     date_field = 'created'
     month_format = '%m'
     allow_empty = True
@@ -64,3 +64,31 @@ class TodaysQuestionList(RedirectView):
             'month': today.month,
             'year': today.year
         })
+
+class CreateAnswerView(LoginRequiredMixin, CreateView):
+    form_class = AnswerForm
+    template_name = 'quest/create_answer.html'
+
+    def get_initial(self):
+        return {
+            'user': self.request.user.id,
+            'question': self.get_question().id
+        }
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(question=self.get_question(), **kwargs)
+
+    def get_success_url(self):
+        return self.object.question.get_absolute_url()
+
+    def form_valid(self, form):
+        action = self.request.POST.get('action')
+        if action == 'SAVE':
+            return super().form_valid(form)
+        elif action == 'PREVIEW':
+            ctx = self.get_context_data(preview=form.cleaned_data['answer'])
+            return self.render_to_response(ctx)
+        return HttpResponseBadRequest()
+
+    def get_question(self):
+        return Question.objects.all().get(pk=self.kwargs['pk'])

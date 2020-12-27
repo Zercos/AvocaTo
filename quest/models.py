@@ -10,7 +10,7 @@ class Question(models.Model):
     POSTED = 4
     DELETED = 5
     STATUSES = (
-        (NEW, 'New'), (ON_REVIEW, 'On review'), (ACCEPTED, 'Accepted'), (POSTED, 'Posted'), (DELETED, 'Deleted')
+        (NEW, 'New'), (ON_REVIEW, 'On review'), (ACCEPTED, 'Accepted'), (DELETED, 'Deleted')
     )
 
     title = models.CharField(max_length=130, null=False, blank=False)
