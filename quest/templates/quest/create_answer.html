@@ -2,7 +2,7 @@
 {% load markdownify %}
 
 {% block body %}
-    {% include 'qanda/common/display_question.html' %}
+    {% include 'quest/common/display_question.html' %}
     {% if preview %}
         <div class="card question-preview">
             <div class="card-header">Answer Preview</div>
@@ -11,5 +11,5 @@
             </div>
         </div>
     {% endif %}
-    {% include 'qanda/common/post_answer.html' %}
+    {% include 'quest/common/post_answer.html' %}
 {% endblock %}
