@@ -8,13 +8,13 @@
                     <span class="badge badge-pill badge-success">Accepted</span>
                 {% endif %}
                 {% if answer.accepted and reject_form %}
-                    <form method="post" action="#">
+                    <form method="post" action="{% url "quest:update_answer_acceptance" pk=answer.id %}">
                         {% csrf_token %}
                         {{ reject_form }}
                         <button class="btn btn-link" type="submit"><i class="fa fa-times" aria-hidden="true"></i>Reject</button>
                     </form>
                 {% elif accept_form %}
-                    <form method="post" action="#">
+                    <form method="post" action="{% url "quest:update_answer_acceptance" pk=answer.id %}">
                         {% csrf_token %}
                         {{ accept_form }}
                         <button class="btn btn-link" type="submit" title="Accept answer">
@@ -29,6 +29,7 @@
                 <div class="meta font-weight-light">Answered by {{ answer.user }} on {{ answer.created }}</div>
             </div>
         </li>
+        <div class="border-top my-3"></div>
     {% empty %}
         <li class="answer">No answers yet!</li>
     {% endfor %}

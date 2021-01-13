@@ -1,12 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseBadRequest
+from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
-from django.views.generic import (CreateView, DayArchiveView, DetailView,
-                                  RedirectView)
+from django.views.generic import CreateView, DayArchiveView, DetailView, UpdateView, RedirectView
 
 from quest.forms import AnswerAcceptanceForm, AnswerForm, QuestionForm
-from quest.models import Question
+from quest.models import Question, Answer
 
 
 class AskQuestionView(LoginRequiredMixin, CreateView):
@@ -92,3 +91,14 @@ class CreateAnswerView(LoginRequiredMixin, CreateView):
 
     def get_question(self):
         return Question.objects.all().get(pk=self.kwargs['pk'])
+
+
+class UpdateAnswerAcceptanceView(LoginRequiredMixin, UpdateView):
+    form_class = AnswerAcceptanceForm
+    queryset = Answer.objects.all()
+
+    def get_success_url(self):
+        return self.object.question.get_absolute_url()
+
+    def form_invalid(self, form):
+        return HttpResponseRedirect(self.object.question.get_absolute_url())
