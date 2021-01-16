@@ -2,10 +2,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
-from django.views.generic import CreateView, DayArchiveView, DetailView, UpdateView, RedirectView
+from django.views.generic import (CreateView, DayArchiveView, DetailView,
+                                  RedirectView, UpdateView)
 
 from quest.forms import AnswerAcceptanceForm, AnswerForm, QuestionForm
-from quest.models import Question, Answer
+from quest.models import Answer, Question
 
 
 class AskQuestionView(LoginRequiredMixin, CreateView):
