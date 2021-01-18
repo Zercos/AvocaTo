@@ -2,8 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseBadRequest, HttpResponseRedirect
 from django.urls import reverse
 from django.utils import timezone
-from django.views.generic import (CreateView, DayArchiveView, DetailView,
-                                  RedirectView, UpdateView)
+from django.views.generic import (CreateView, DayArchiveView, DetailView, RedirectView, UpdateView, ListView)
 
 from quest.forms import AnswerAcceptanceForm, AnswerForm, QuestionForm
 from quest.models import Answer, Question
@@ -65,6 +64,7 @@ class TodaysQuestionList(RedirectView):
             'year': today.year
         })
 
+
 class CreateAnswerView(LoginRequiredMixin, CreateView):
     form_class = AnswerForm
     template_name = 'quest/create_answer.html'
@@ -103,3 +103,10 @@ class UpdateAnswerAcceptanceView(LoginRequiredMixin, UpdateView):
 
     def form_invalid(self, form):
         return HttpResponseRedirect(self.object.question.get_absolute_url())
+
+
+class UserQuestionsListView(LoginRequiredMixin, ListView):
+    template_name = 'quest/user_questions_list.html'
+
+    def get_queryset(self):
+        return self.request.user.question_set.all()

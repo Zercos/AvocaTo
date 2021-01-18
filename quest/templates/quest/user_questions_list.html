@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Questions from {{ user.email }}{% endblock %}
+
+{% block body %}
+    <div class="col-sm-12">
+        <h1>Questions from {{ user.email }}</h1>
+        <ul>
+            {% for question in object_list %}
+                <li>
+                    {{ question.votes }}
+                    <a href="{{ question.get_absolute_url }}">{{ question }}</a>
+                    by {{ question.user }}
+                    on {{ question.created }}
+                </li>
+            {% empty %}
+                <li>No questions for this user.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
