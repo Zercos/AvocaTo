@@ -2,14 +2,38 @@ version: '2.2'
 
 services:
   db:
-    image: postgres
+    build: docker/psql
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - DB_USER
+      - DB_NAME
+      - DB_PASSWORD
+      - POSTGRES_PASSWORD
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8080
+    command: python manage.py runserver 0.0.0.0:8000
     container_name: django_web
+    entrypoint: /avocato/docker-entrypoint.sh
     volumes:
       - .:/avocato
     ports:
-      - "8080:8080"
+      - "8000:8000"
     depends_on:
       - db
+    environment:
+      - SECRET_KEY
+      - DEBUG
+      - DB_NAME
+      - DB_USER
+      - DB_PASSWORD
+      - DB_HOST
+      - DB_PORT
+      - EMAIL_HOST
+      - EMAIL_HOST_USER
+      - EMAIL_PORT
+      - EMAIL_USE_TLS
+      - EMAIL_HOST_PASSWORD
+      - EMAIL_FROM
+      - CELERY_BROKER_URL

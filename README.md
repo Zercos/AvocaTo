@@ -21,7 +21,7 @@ cd AvocaTo && pipenv install --dev && pipenv shell
 
 * Create .env and fill with your environment variables configuration file from example config
 ```
-cp config/.env.example config/.env
+cp .env.example .env
 ```
 
 * Run the migration to set up the database
