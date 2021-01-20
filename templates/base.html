@@ -21,6 +21,7 @@
             <a href="{% url 'quest:ask' %}" class="nav-item nav-link">Ask</a>
             <a href="{% url 'quest:index' %}" class="nav-item nav-link">Today's Questions</a>
             {% if user.is_authenticated %}
+                <a href="{% url 'quest:user_questions' %}" class="nav-item nav-link">My questions</a>
                 <a href="{% url 'users:logout' %}" class="nav-item nav-link">Logout</a>
             {% else %}
                 <a href="{% url 'users:login' %}" class="nav-item nav-link">Login</a>

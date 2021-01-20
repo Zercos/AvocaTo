@@ -11,4 +11,5 @@ urlpatterns = [
     path('ask', views.AskQuestionView.as_view(), name='ask'),
     path('a/<int:pk>/accept', views.UpdateAnswerAcceptanceView.as_view(), name='update_answer_acceptance'),
     path('q/<int:pk>/answer', views.CreateAnswerView.as_view(), name='answer_question'),
+    path('my-questions/', views.UserQuestionsListView.as_view(), name='user_questions'),
 ]
