@@ -1,0 +1,15 @@
+version: '2.2'
+
+services:
+  db:
+    image: postgres
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8080
+    container_name: django_web
+    volumes:
+      - .:/avocato
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
