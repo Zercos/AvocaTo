@@ -9,32 +9,42 @@ All of the site visitors will be able to see the question and the answers but on
 
 ## Getting Started
 This guide walks you through to start the AvocaTo application.
+You can choose to install all the components on your machine or to run it as Docker container.
 
-#### Installation
+### Base installation
 
 * Clone this repository or download the version package
 
-* Go to project directory and install requirements for development
+* Create .env and fill with your environment variables configuration file from example config
+```
+cp .env.example .env
+```
+
+#### Local set up
+
+* Go to project directory and install requirements for development using Pipenv
 ```
 cd AvocaTo && pipenv install --dev && pipenv shell
 ```
 
-* Create .env and fill with your environment variables configuration file from example config
-```
-cp config/.env.example config/.env
-```
+* Create the PostgreSQL user and database
 
 * Run the migration to set up the database
 ```
 ./manage.py migrate
 ```
 
-#### Run the application
-
 Run development server:
-
 ```
 ./manage.py runserver
+```
+
+#### Docker set up
+
+* Run the docker compose
+This will run the development server on the localhost:8000
+```
+docker-compose -d up
 ```
 
 ## System dependencies
