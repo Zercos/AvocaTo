@@ -17,7 +17,7 @@ You can choose to install all the components on your machine or to run it as Doc
 
 * Create .env and fill with your environment variables configuration file from example config
 ```
-cp .env.example .env
+cp config/.env.example .env
 ```
 
 #### Local set up
