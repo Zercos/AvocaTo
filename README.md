@@ -41,7 +41,13 @@ Run development server:
 
 #### Docker set up
 
-* Run the docker compose
+* Run the docker-compose build
+This will build all the images
+```
+docker-compose build
+```
+
+Run the docker-compose up
 This will run the development server on the localhost:8000
 ```
 docker-compose -d up
